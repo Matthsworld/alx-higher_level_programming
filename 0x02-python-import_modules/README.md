@@ -4,8 +4,8 @@ Project done during **Full Stack Software Engineering studies** at **ALX School*
 ## Technologies
 * Shell Scripts are written in Bash
 * Python Scripts are written with Python
-* C files are compiled using `gcc` 
-* Tested on Ubuntu 14.04 LTS
+* C files are compiled using `gcc`
+* Tested on Ubuntu 20.04 LTS
 
 ## Files
 | Filename | Description |

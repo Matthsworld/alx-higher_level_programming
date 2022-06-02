@@ -1,2 +1,1 @@
-README FOR ALX HIGHER LEVEL PROGRAMMING REPO
-
+# Full Stack Software Engineering studies at ALX School.
