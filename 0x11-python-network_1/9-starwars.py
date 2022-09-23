@@ -1,16 +1,18 @@
 #!/usr/bin/python3
 """
-Python script that sends a search request to the
-Star Wars API, searching people
+given letter pattern as param to be search val of request; print Star War names
+usage: ./9-starwars.py [letter pattern to match names]
 """
+from sys import argv
 import requests
-import sys
 
 
 if __name__ == "__main__":
-    search = 'https://swapi.co/api/people/?search={}'.format(sys.argv[1])
-    r = requests.get(search)
-    json_o = r.json()
-    print("Number of results: {}".format(json_o.get('count')))
-    for character in json_o.get('results'):
-        print(character.get('name'))
+    url = 'https://swapi.co/api/people'
+    param = {'search': argv[1]}
+    r = requests.get(url, params=param)
+
+    matching_ppl = r.json()
+    print("Number of results: {}".format(matching_ppl.get('count')))
+    for person in matching_ppl.get('results'):
+        print(person.get('name'))

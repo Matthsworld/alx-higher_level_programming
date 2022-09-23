@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 """
-Python script that takes in a URL and an email, sends a POST
-request to the passed URL with the email as a parameter, and
-displays the body of the response
+given URL & email as params, send POST req to URL, display response body utf-8
+usage: ./2-post_email.py http://0.0.0.0:5000/post_email hr@holbertonschool.com
 """
-from urllib import request, parse
-import sys
+from sys import argv
+import urllib.parse
+import urllib.request
 
 
 if __name__ == "__main__":
-    values = {'email': sys.argv[2]}
-    data = parse.urlencode(values)
+    url = argv[1]
+    values = {'email': argv[2]}
+
+    data = urllib.parse.urlencode(values)
     data = data.encode('ascii')
-    req = request.Request(sys.argv[1], data)
-    with request.urlopen(req) as response:
-        body = response.read()
-        print(body.decode('utf-8'))
+    req = urllib.request.Request(url, data)
+    with urllib.request.urlopen(req) as response:
+        print(response.read().decode('utf-8'))

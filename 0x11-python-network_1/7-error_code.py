@@ -1,16 +1,14 @@
 #!/usr/bin/python3
 """
-Python script that sends a request to the URL and
-displays:
-- The body of the response if there are no errors
-- The error code when there is an HTTP error.
+given URL & email as params, display response body utf-8, print error codes
+usage: ./7-error_code.py http://0.0.0.0:5000/status_401
 """
+from sys import argv
 import requests
-import sys
 
 
 if __name__ == "__main__":
-    r = requests.get(sys.argv[1])
+    r = requests.get(argv[1])
     if r.status_code >= 400:
         print("Error code: {}".format(r.status_code))
     else:

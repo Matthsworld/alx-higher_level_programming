@@ -1,23 +1,33 @@
 #!/usr/bin/python3
 """
-Python script that sends a search request to the
-Star Wars API, searching people
+given letter pattern as param to be search val of request; print Star War names
+usage: ./101-starwars.py [letter pattern to match names]
 """
+from sys import argv
 import requests
-import sys
 
+if __name__ == '__main__':
+    if len(argv) < 2:
+        pattern = ""
+    else:
+        pattern = argv[1]
+    url = 'https://swapi.co/api/people/?search={}'.format(pattern)
+    r = requests.get(url)
+    print('Number of results: {}'.format(r.json().get('count')))
 
-if __name__ == "__main__":
-    page = 1
-    while page:
-        s = sys.argv[1]
-        url = 'https://swapi.co/api/people/?search={}&page={}'.format(s, page)
-        r = requests.get(url)
-        json_o = r.json()
-        if page == 1:
-            print("Number of results: {}".format(json_o.get('count')))
-        for character in json_o.get('results'):
-            print(character.get('name'))
-        if not json_o.get('next'):
-            break
-        page += 1
+    if r.json().get('count') > 0:
+        matching_names = r.json().get('results')
+        for person in matching_names:
+            print(person.get('name'))
+
+        more = r.json().get('next')
+        page = 2
+        while more is not None:
+            url = 'https://swapi.co/api/people/?search={}&page={}'.format(
+                pattern, page)
+            r = requests.get(url)
+            matching_names = r.json().get('results')
+            for person in matching_names:
+                print(person.get('name'))
+            more = r.json().get('next')
+            page += 1
